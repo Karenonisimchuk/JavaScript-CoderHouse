@@ -160,7 +160,69 @@ function main() {
 
   alert("Fin");
 }
-
 // orden del menu();
 
-main();
+//main();
+
+// clase DOM();
+console.log(document); 
+console.log(document.head);
+console.log(document.body);
+
+const listaProductos = [
+  {
+    id: 1,
+    nombre: "Remera",
+    codigo: "5453",
+    precioprenda: "3999",
+    disponibles: 22,
+  },
+  {
+    id: 2,
+    nombre: "Pantalon",
+    codigo: "1133",
+    precioprenda: "5599",
+    disponibles: 42,
+  },
+  {
+    id: 3,
+    nombre: "Buzo",
+    codigo: "3415",
+    precioprenda: "6599",
+    disponibles: 12,
+  },
+  {
+    id: 4,
+    nombre: "Campera",
+    codigo: "4213",
+    precioprenda: "8799",
+    disponibles: 23,
+  },
+  {
+    id: 5,
+    nombre: "Ropa interior",
+    codigo: "0012",
+    precioprenda: "999",
+    disponibles: 92,
+  },
+
+];
+
+const contenedorProductos = document.getElementById("contenedor-productos");
+
+for (const producto of listaProductos) {
+  let column = document.createElement("div");
+  column.className = "col-md-4 mt-3 ";
+  column.id = `columna-${producto.id}`;
+  column.innerHTML = `
+      <div class="card">
+          <div class="card-body">
+          <p class="card-text">Nombre: <b>${producto.nombre}</b></p>
+          <p class="card-text">Codigo: <b>${producto.codigo}</b></p>
+          <p class="card-text">Precio: <b>${producto.precioprenda}</b></p>
+          <p class="card-text">Disponibles: <b>${producto.disponibles}</b></p>
+          </div>
+      </div>`;
+
+  contenedorProductos.append(column);
+}
