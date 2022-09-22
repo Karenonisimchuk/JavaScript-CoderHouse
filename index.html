@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Entrega DOM</title>
+    <title>Entrega Eventos</title>
     <link rel="stylesheet" href="styles.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -18,6 +18,48 @@
         <h2 class="titulo">Promociones Wineem</h2>
 
         <div id="contenedor-productos" class="row"></div>
+      </div>
+    </div>
+    <div class="container p-3">
+      <div class="row">
+        <div class="col-md-6">
+          <div id="contenedorProductos" class="row"></div>
+        </div>
+        <div class="col-md-6">
+          <h3>Calcula tu saldo</h3>
+          <form id="formulario">
+            <div class="mb-3">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="inputNombreProducto" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Codigo</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputCodigo"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Precio de la prenda</label>
+              <input
+                type="number"
+                class="form-control"
+                id="inputPrecioPrenda"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">cantidad</label>
+              <input type="number" class="form-control" id="inputCantidad" />
+            </div>
+
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">Calcular</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <footer>
