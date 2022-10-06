@@ -1,60 +1,60 @@
 document.addEventListener("DOMContentLoaded", () => {
-// Lista de productos
-const listaProductos = [
-  {
-    id: 1,
-    nombre: "Remera",
-    codigo: "5453",
-    precioprenda: "3999",
-    disponibles: 22,
-    imagen: "./img/Wineem-remera.jpg",
-  },
-  {
-    id: 2,
-    nombre: "Pantalon",
-    codigo: "1133",
-    precioprenda: "5599",
-    disponibles: 42,
-    imagen: "./img/Wineem-pantalon.jpg",
-  },
-  {
-    id: 3,
-    nombre: "Buzo",
-    codigo: "3415",
-    precioprenda: "6599",
-    disponibles: 12,
-    imagen: "./img/Wineem-buzo.jpg",
-  },
-  {
-    id: 4,
-    nombre: "Campera",
-    codigo: "4213",
-    precioprenda: "8799",
-    disponibles: 23,
-    imagen: "./img/Wineem-campera.jpg",
-  },
-  {
-    id: 5,
-    nombre: "Ropa interior",
-    codigo: "0012",
-    precioprenda: "999",
-    disponibles: 92,
-    imagen: "./img/Wineem-intimo.jpg",
-  },
-  {
-    id: 6,
-    nombre: "Pijama",
-    codigo: "0034",
-    precioprenda: "2999",
-    disponibles: 40,
-    imagen: "./img/Wineem-pijama.jpg",
-  },
+  // Lista de productos
+  const listaProductos = [
+    {
+      id: 1,
+      nombre: "Remera",
+      codigo: "5453",
+      precioprenda: "3999",
+      disponibles: 22,
+      imagen: "./img/Wineem-remera.jpg",
+    },
+    {
+      id: 2,
+      nombre: "Pantalon",
+      codigo: "1133",
+      precioprenda: "5599",
+      disponibles: 42,
+      imagen: "./img/Wineem-pantalon.jpg",
+    },
+    {
+      id: 3,
+      nombre: "Buzo",
+      codigo: "3415",
+      precioprenda: "6599",
+      disponibles: 12,
+      imagen: "./img/Wineem-buzo.jpg",
+    },
+    {
+      id: 4,
+      nombre: "Campera",
+      codigo: "4213",
+      precioprenda: "8799",
+      disponibles: 23,
+      imagen: "./img/Wineem-campera.jpg",
+    },
+    {
+      id: 5,
+      nombre: "Ropa interior",
+      codigo: "0012",
+      precioprenda: "999",
+      disponibles: 92,
+      imagen: "./img/Wineem-intimo.jpg",
+    },
+    {
+      id: 6,
+      nombre: "Pijama",
+      codigo: "0034",
+      precioprenda: "2999",
+      disponibles: 40,
+      imagen: "./img/Wineem-pijama.jpg",
+    },
 
 
-];
+  ];
 
-// Carrito
-let carrito = [];
+  // Carrito
+  let carrito = [];
   const valor = "$";
   const producto = document.querySelector("#producto");
   const itemCarrito = document.querySelector("#carrito");
@@ -62,7 +62,7 @@ let carrito = [];
   const botonVaciar = document.querySelector("#boton-vaciar");
   const LOCSTORAGE = window.localStorage;
 
-// Estructura productos
+  // Estructura productos
   function imprimirProductos() {
     listaProductos.forEach((info) => {
       // Estructura
@@ -94,7 +94,7 @@ let carrito = [];
       // Boton
       const nodoBoton = document.createElement("button");
       nodoBoton.classList.add("btn", "btn-primary");
-      nodoBoton.textContent = "+";
+      nodoBoton.textContent = "Agregar";
       nodoBoton.setAttribute("marcador", info.id);
       nodoBoton.addEventListener("click", agregarProducto);
       // Insertamos
@@ -109,14 +109,14 @@ let carrito = [];
     });
   }
 
-// Agregar producto
+  // Agregar producto
   function agregarProducto(evento) {
     carrito.push(evento.target.getAttribute("marcador"));
-  
+
     imprimirCarrito();
     guardarCarrito();
   }
- 
+
   // imprimir carrito con productos seleccionados
   function imprimirCarrito() {
     itemCarrito.textContent = "";
@@ -133,7 +133,7 @@ let carrito = [];
       const nodo = document.createElement("li");
       nodo.classList.add("list-group-item", "text-right", "mx-2");
       nodo.textContent = `${UNIDADESITEM} x ${ITEM[0].nombre} - ${valor}${ITEM[0].precioprenda}`;
-  
+
       const boton = document.createElement("button");
       boton.classList.add("btn", "btn-danger", "mx-5");
       boton.textContent = "X";
@@ -144,7 +144,7 @@ let carrito = [];
       nodo.appendChild(boton);
       itemCarrito.appendChild(nodo);
     });
-  
+
     total.textContent = calcularTotal();
   }
 
@@ -161,7 +161,7 @@ let carrito = [];
   }
 
 
-// Precio total
+  // Precio total
   function calcularTotal() {
     return carrito
       .reduce((total, item) => {
@@ -170,12 +170,47 @@ let carrito = [];
         });
         return parseInt(total) + parseInt(ITEM[0].precioprenda);
       }, 0);
-    }
+  }
 
   function vaciarCarrito() {
-    carrito = [];
-    imprimirCarrito();
-    localStorage.clear();
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+  
+    swalWithBootstrapButtons.fire({
+      title: 'Quieres vaciar el carrito?',
+      text: "Se eliminarán todos los productos seleccionados",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Eliminado',
+          'Su carrito esta vacio',
+          'success'
+        );
+
+        carrito = [];
+        imprimirCarrito();
+        localStorage.clear();
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'Los productos siguen en su carrito',
+          'error'
+        )
+      }
+    });
   }
 
   function guardarCarrito() {
@@ -191,7 +226,7 @@ let carrito = [];
   botonVaciar.addEventListener("click", vaciarCarrito);
 
 
-// buscador?
+  // buscador?
   let lista = document.querySelector(".collection");
   let txtbusca = document.getElementById("search");
 
