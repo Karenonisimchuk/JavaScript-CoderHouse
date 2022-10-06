@@ -113,6 +113,19 @@ document.addEventListener("DOMContentLoaded", () => {
   function agregarProducto(evento) {
     carrito.push(evento.target.getAttribute("marcador"));
 
+    Toastify({
+      text: "Producto Agregado",
+      duration: 3000,
+      close: true,
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
+      style: {
+        background: "linear-gradient(to right, #FF7466, #FF471A)",
+      },
+      onClick: function(){}
+    }).showToast();
+
     imprimirCarrito();
     guardarCarrito();
   }
@@ -136,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const boton = document.createElement("button");
       boton.classList.add("btn", "btn-danger", "mx-5");
-      boton.textContent = "X";
+      boton.textContent = "Eliminar";
       boton.style.marginLeft = "1rem";
       boton.dataset.item = item;
       boton.addEventListener("click", borrarItem);
@@ -155,6 +168,20 @@ document.addEventListener("DOMContentLoaded", () => {
     carrito = carrito.filter((carritoId) => {
       return carritoId !== id;
     });
+    
+    Toastify({
+      text: "Producto Eliminado",
+      duration: 3000,
+      close: true,
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
+      style: {
+        background: "linear-gradient(to right, #FF7466, #FF471A)",
+      },
+      onClick: function(){}
+    }).showToast();
+
 
     imprimirCarrito();
     guardarCarrito();
@@ -201,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imprimirCarrito();
         localStorage.clear();
       } else if (
-        /* Read more about handling dismissals below */
+        
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
