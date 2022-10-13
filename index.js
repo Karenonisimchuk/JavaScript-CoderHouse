@@ -276,7 +276,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // FETCH
+  function consultarProductos() {
+      fetch("https://6244e0467701ec8f724a5a7f.mockapi.io/api/productos")
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.log(error));
+      }
+
   cargarCarrito();
   imprimirProductos();
   imprimirCarrito();
+  consultarProductos();
 });
