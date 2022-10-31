@@ -1,7 +1,12 @@
+/* -------GENERAL--------- */
 .banner {
     background-image: url(./img/banner.png);
     background-repeat: no-repeat;
     background-size: 100% 85%;
+}
+
+.container {
+    padding: 5px;
 }
 
 .titulo {
@@ -14,10 +19,6 @@
 
 .texto {
     text-align: center;
-}
-
-.container {
-    padding: 5px;
 }
 
 .col-sm-12 {
@@ -71,6 +72,7 @@
     height: auto;
 }
 
+/* -------Footer--------- */
 .footer {
     background-color: #000000;
     padding-top: 20px;
@@ -141,6 +143,8 @@
     color: #24262b;
     background-color: #ffffff;
 }
+
+/* -------ERROR404--------- */
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Open+Sans:wght@300;400&display=swap");
 .button, #error .error__button {
